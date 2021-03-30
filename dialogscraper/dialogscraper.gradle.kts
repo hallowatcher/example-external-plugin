@@ -27,10 +27,17 @@ import ProjectVersions.openosrsVersion
 
 version = "0.0.1"
 
-project.extra["PluginName"] = "Java example plugin" // This is the name that is used in the external plugin manager panel
-project.extra["PluginDescription"] = "Java example plugin" // This is the description that is used in the external plugin manager panel
+project.extra["PluginName"] = "Dialog Scraper"
+project.extra["PluginDescription"] = "A plugin to scrape dialog information like text, head animations and options."
+
+plugins {
+    id("com.github.johnrengelman.shadow") version "6.1.0"
+    id("java")
+}
 
 dependencies {
+    implementation("org.json:json:20210307")
+
     annotationProcessor(Libraries.lombok)
     annotationProcessor(Libraries.pf4j)
 
@@ -54,5 +61,17 @@ tasks {
                     "Plugin-License" to project.extra["PluginLicense"]
             ))
         }
+    }
+}
+
+tasks {
+    shadowJar {
+        mergeServiceFiles()
+    }
+}
+
+tasks {
+    build {
+        dependsOn("shadowJar")
     }
 }

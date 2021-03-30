@@ -22,24 +22,48 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.example.javaexample;
+package com.hallowatcher.dialogscraper;
 
 import net.runelite.client.config.Config;
 import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigItem;
 
+import java.nio.file.Paths;
+
 @ConfigGroup("JavaExampleConfig")
 
-public interface JavaExampleConfig extends Config
+public interface DialogScraperConfig extends Config
 {
 	@ConfigItem(
-		keyName = "example",
-		name = "Example config item",
-		description = "Example",
+		keyName = "scrapeDialog",
+		name = "Scrape dialogs",
+		description = "Save each detected dialog, along with animation IDs and options",
 		position = 0
 	)
-	default boolean example()
+	default boolean scrapeDialog()
 	{
 		return true;
+	}
+
+	@ConfigItem(
+			keyName = "scrapeQuestDiary",
+			name = "Scrape quest diaries",
+			description = "Scrape the information inside the quest diary",
+			position = 1
+	)
+	default boolean scrapeQuestDiary()
+	{
+		return true;
+	}
+
+	@ConfigItem(
+			keyName = "savePath",
+			name = "Path to save",
+			description = "Path to save your chat dialogs and quest diaries",
+			position = 2
+	)
+	default String savePath()
+	{
+		return String.valueOf(Paths.get(System.getProperty("user.home"), "DialogScraper"));
 	}
 }

@@ -25,8 +25,8 @@
 
 rootProject.name = "external plugins example"
 
-include(":kotlinexample")
-include(":javaexample")
+// include(":kotlinexample")
+include(":dialogscraper")
 
 for (project in rootProject.children) {
     project.apply {
